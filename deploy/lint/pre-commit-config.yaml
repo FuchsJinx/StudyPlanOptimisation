@@ -1,0 +1,22 @@
+# pre-commit hooks (опционально)
+# Установка: pip install pre-commit && pre-commit install
+# Конфиг:   pre-commit install --config deploy/lint/pre-commit-config.yaml
+
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.9.9
+    hooks:
+      - id: ruff
+        args: [--config, deploy/lint/ruff.toml, --fix]
+      - id: ruff-format
+        args: [--config, deploy/lint/ruff.toml]
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+        args: [--maxkb=5120]
+      - id: detect-private-key
