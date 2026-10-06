@@ -7,6 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.router import api_router
 from app.config import get_settings
+from app.db.seed import seed_users_if_empty
 from app.db.session import init_db
 
 
@@ -15,8 +16,12 @@ async def lifespan(_: FastAPI):
     settings = get_settings()
     Path(settings.uploads_dir).mkdir(parents=True, exist_ok=True)
     Path(settings.logs_dir).mkdir(parents=True, exist_ok=True)
-    Path(settings.database_url.replace("sqlite:///", "")).parent.mkdir(parents=True, exist_ok=True)
+    db_path = settings.database_url.replace("sqlite:///", "")
+    Path(db_path).parent.mkdir(parents=True, exist_ok=True)
     init_db()
+    created = seed_users_if_empty()
+    if created:
+        print(f"[startup] seeded {created} default users")
     yield
 
 
