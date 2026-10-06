@@ -1,16 +1,23 @@
 :root {
-  --color-primary: #1f4e79;
-  --color-primary-soft: #d6e3f0;
-  --color-accent: #0d9488;
-  --color-warn: #d97706;
-  --color-err: #dc2626;
-  --color-bg: #f8fafc;
+  --font: "Segoe UI", "Inter", "Source Sans 3", system-ui, sans-serif;
+  --color-bg: #eef1f6;
   --color-surface: #ffffff;
-  --color-text: #0f172a;
-  --color-muted: #64748b;
-  --color-border: #e2e8f0;
-  --radius: 8px;
-  --shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.04);
-  --sidebar-width: 240px;
-  --font: "Segoe UI", "Source Sans 3", system-ui, sans-serif;
+  --color-text: #0f1c2e;
+  --color-muted: #6b7a90;
+  --color-border: #d9e0ea;
+  --color-primary: #1a3358;
+  --color-primary-2: #243f6b;
+  --color-primary-soft: #e7eef8;
+  --color-link: #4c6fb8;
+  --color-accent: #1b7a6e;
+  --color-warn: #c2410c;
+  --color-err: #b91c1c;
+  --color-ok: #16a34a;
+  --sidebar-bg: #15253f;
+  --sidebar-active: #243b63;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 1px 2px rgba(15, 28, 46, 0.05), 0 8px 24px rgba(15, 28, 46, 0.05);
+  --sidebar-width: 236px;
+  --topbar-height: 56px;
 }

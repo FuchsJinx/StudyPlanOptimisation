@@ -48,14 +48,19 @@ def test_login_success_and_fail(client: TestClient):
     assert data["role"] == "admin"
     assert data["access_token"]
 
-    bad = client.post("/api/auth/login", json={"login": "admin", "password": "wrong"})
+    bad = client.post("/api/auth/login", json={"login": "admin", "password": "wrong!"})
     assert bad.status_code == 401
 
 
 def test_create_user_via_admin(client: TestClient):
     client.post("/api/admin/users/seed")
+    login = client.post("/api/auth/login", json={"login": "admin", "password": "Admin123!"})
+    assert login.status_code == 200
+    headers = {"Authorization": f"Bearer {login.json()['access_token']}"}
+
     res = client.post(
         "/api/admin/users",
+        headers=headers,
         json={
             "login": "teacher1",
             "password": "Teach123!",
@@ -64,8 +69,7 @@ def test_create_user_via_admin(client: TestClient):
             "email": "t1@local",
         },
     )
-    # may 201 or 409 if rerun
     assert res.status_code in (201, 409)
-    users = client.get("/api/admin/users")
+    users = client.get("/api/admin/users", headers=headers)
     assert users.status_code == 200
     assert any(u["login"] == "admin" for u in users.json())

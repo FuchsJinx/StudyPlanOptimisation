@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.router import api_router
 from app.config import get_settings
-from app.db.seed import seed_users_if_empty
+from app.db.seed import seed_directories_if_empty, seed_users_if_empty
 from app.db.session import init_db
 
 
@@ -22,6 +22,9 @@ async def lifespan(_: FastAPI):
     created = seed_users_if_empty()
     if created:
         print(f"[startup] seeded {created} default users")
+    refs_created = seed_directories_if_empty()
+    if refs_created:
+        print(f"[startup] seeded {refs_created} directory records")
     yield
 
 
